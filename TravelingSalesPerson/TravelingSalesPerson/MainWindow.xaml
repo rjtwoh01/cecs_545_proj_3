@@ -21,6 +21,7 @@
                     <MenuItem Header="Brute Force" Click="bruteForceClick"/>
                     <MenuItem Header="DFS" Click="dfsClick"/>
                     <MenuItem Header="BFS" Click="bfsClick"/>
+                    <MenuItem Header="Closest Edge Insertion" Click="closestEdgeClick"/>
                 </ContextMenu>
             </Button.ContextMenu>
         </Button>

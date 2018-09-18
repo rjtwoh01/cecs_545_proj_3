@@ -87,7 +87,7 @@ namespace TravelingSalesPerson
             this.shortestDistance = 0;
         }
 
-        public double distance(Point pointOne, Point pointTwo)
+        public static double distance(Point pointOne, Point pointTwo)
         {
             return Math.Sqrt(Math.Pow((pointTwo.X - pointOne.X), 2) + Math.Pow((pointTwo.Y - pointOne.Y), 2));
         }
@@ -359,6 +359,30 @@ namespace TravelingSalesPerson
             {
                 finalList.Add(p);
             }
+
+            return finalList;
+        }
+
+        public List<Point> ClosestEdgeInsertion()
+        {
+            //This final list will represent the correct order - or path - to take
+            List<Point> finalList = new List<Point>();
+            List<TSPEdge> edges = new List<TSPEdge>();
+            //var tempList = new List<Point>();
+            //var newList = new List<Point>();
+            double localDistance = 0;
+            shortestDistance = 0;
+            int initialCount = 0;
+
+            //Initially we're going to start with the first 3 points
+            for (int i = 0; i < 3; i++)
+            {
+                int j = i + 1;
+                if (j == 3) { j = 0; }
+                edges.Add(new TSPEdge(this.points[i], this.points[j]));
+                Debug.WriteLine(i + ", " + j);
+            }
+
 
             return finalList;
         }

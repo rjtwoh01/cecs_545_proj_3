@@ -363,6 +363,20 @@ namespace TravelingSalesPerson
                 displayRunTime();
                 drawLines(tempResult);
             }
+            else if (type == "closestEdge")
+            {
+                Stopwatch sw = Stopwatch.StartNew();
+                List<Point> tempResult = tsp.ClosestEdgeInsertion();
+                sw.Stop();
+
+                TimeSpan elapsedTime = sw.Elapsed;
+                string shortestDistance = String.Format("{0:0.00}", tsp.shortestDistance);
+                this.lblRunTime.Content = "Distance: " + shortestDistance + "\nRun Time: " + elapsedTime.ToString();
+
+                displayRunTime();
+                //drawLines(tempResult);
+
+            }
             else
             {
                 MessageBox.Show(type + " is not implemented yet");
@@ -412,6 +426,16 @@ namespace TravelingSalesPerson
             setupBfsDfs();            
         }
 
+        private void closestEdgeClick(object sender, RoutedEventArgs e)
+        {
+            if (canvas != null)
+                this.canvas.Children.Clear();
+            if (tspPoints.Count() != 0)
+                plotPoints(tspPoints);
+            showSolveButton();
+            type = "closestEdge";
+            Debug.WriteLine(type);
+        }
 
         #endregion
     }

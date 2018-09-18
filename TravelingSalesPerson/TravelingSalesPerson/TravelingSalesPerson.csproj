@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="TSP.cs" />
     <Compile Include="TSPConnection.cs" />
+    <Compile Include="TSPEdge.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

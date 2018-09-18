@@ -374,7 +374,7 @@ namespace TravelingSalesPerson
                 this.lblRunTime.Content = "Distance: " + shortestDistance + "\nRun Time: " + elapsedTime.ToString();
 
                 displayRunTime();
-                //drawLines(tempResult);
+                drawLines(tempResult);
 
             }
             else

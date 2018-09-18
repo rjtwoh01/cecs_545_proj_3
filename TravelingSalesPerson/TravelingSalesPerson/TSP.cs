@@ -373,16 +373,51 @@ namespace TravelingSalesPerson
             double localDistance = 0;
             shortestDistance = 0;
             int initialCount = 0;
-
-            //Initially we're going to start with the first 3 points
-            for (int i = 0; i < 3; i++)
+            
+            for (int i = 0; i < this.points.Count; i++)
             {
-                int j = i + 1;
-                if (j == 3) { j = 0; }
-                edges.Add(new TSPEdge(this.points[i], this.points[j]));
-                Debug.WriteLine(i + ", " + j);
+                //Initially we're going to start with the first 3 points
+                if (i < 3)
+                {
+                    int j = i + 1;
+                    if (j == 3) { j = 0; }
+                    edges.Add(new TSPEdge(this.points[i], this.points[j]));
+                    Debug.WriteLine(i + ", " + j);
+                }
+                else
+                {
+                    TSPEdge current = edges[0];
+                    localDistance = edges[0].DistanceFrom(this.points[i]);
+
+                    for (int j = 1; j < edges.Count; j++)
+                    {
+                        double tempDistance = edges[j].DistanceFrom(this.points[i]);
+                        if (tempDistance < localDistance)
+                        {
+                            localDistance = tempDistance;
+                            current = edges[j];
+                        }
+                    }
+                    int index = edges.IndexOf(current);
+                    edges.Insert(index, new TSPEdge(current.p1, this.points[i]));
+                    edges.Insert(index + 1, new TSPEdge(this.points[i], current.p2));
+                    edges.Remove(current);
+                }
             }
 
+            foreach (TSPEdge edge in edges)
+            {
+                finalList.Add(edge.p1);
+            }
+            finalList.Add(edges[0].p1);
+
+            localDistance = 0;
+            for (int i = 0; i < finalList.Count(); i++)
+            {
+                if ((i + 1) != finalList.Count())
+                    localDistance += distance(finalList[i], finalList[i + 1]);
+            }
+            this.shortestDistance = localDistance;
 
             return finalList;
         }
